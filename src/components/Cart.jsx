@@ -2,7 +2,9 @@ import React from 'react'
 import { Trash, Heart } from 'lucide-react'
 
 
-export function Cart({cartitems,removefromcart}) {
+export function Cart({cartitems,functions}) {
+
+
 
   return (
     <div className="scroll-style mx-6 w-[50%] overflow-x-auto  flex max-w-3xl flex-col space-y-4 p-12 px-2 sm:p-10 sm:px-2">
@@ -30,12 +32,14 @@ export function Cart({cartitems,removefromcart}) {
                     <p className="text-lg text-white font-semibold">{product.price}</p>
                   </div>
                 </div>
-                <div className="flex divide-x text-sm">
-                  <button type="button" onClick={()=>removefromcart(product)} className="flex items-center space-x-2 px-2 py-1 pl-0">
+                <div className="flex text-sm">
+                  <button type="button" onClick={()=>functions.removefromcart(product)} className="flex items-center space-x-2 px-2 py-1 pl-0">
                     <Trash  className="text-red-800" size={16} />
                     <span className="text-red-800">Remove</span>
                   </button>
-                  <span className="text-red-800">{product.quantity}</span>
+                  <button className="p-5 text-white" onClick={()=>functions.decrement(product)}>-</button>
+                  <span className="text-red-800 p-5">{product.quantity}</span>
+                  <button className="p-5 text-white" onClick={()=>functions.increment(product)}>+</button>
                 </div>
               </div>
             </div>
@@ -47,6 +51,9 @@ export function Cart({cartitems,removefromcart}) {
           Total amount:
           <span className="font-semibold "> Rs.{cartitems.reduce((sum,item)=>sum+item.price*item.quantity,0)}</span>
         </p>
+        <button 
+          className="mt-4 w-full rounded-sm bg-black px-2 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black">
+            Order Now</button>
       </div>
     </div>
   )

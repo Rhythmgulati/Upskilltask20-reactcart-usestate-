@@ -31,14 +31,28 @@ function removefromcart(shoe){
 );
   console.log(cart);
 }
-
+function increment(shoe){
+  setcart((prevItems)=> prevItems.map(item=>item.id===shoe.id?{ ...item, quantity: item.quantity + 1 } : item)
+    );
+    // console.log(cart);
+}
+function decrement(shoe){
+  setcart((previtems)=> {
+   
+      return previtems.map(item => item.id === shoe.id ? { ...item, quantity: item.quantity - 1 } : item )
+    
+  })
+}
+const functions ={
+  removefromcart,increment,decrement
+}
 
   return (
     <>
     <Header/>
     <main className="flex w-full h-[93vh] bg-gray-800">
       <ProductList addtocart={addtocart}/>
-      <Cart cartitems={cart} removefromcart={removefromcart}/>
+      <Cart cartitems={cart} functions={functions} />
     </main>
     </>
   )
